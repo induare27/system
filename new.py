@@ -39,7 +39,7 @@ class System:
                     "email":email,
                     "dob":dob
                 })
-                self.adm_users.append("user_name")
+                self.adm_users.append(user_name)
                 return
             else:
                 print("This username is already taken, try with another one.Incase you already registered then, please log in")
@@ -54,7 +54,7 @@ class System:
                     "email":email,
                     "dob":dob
                 })
-                self.reg_users.append("user_name")
+                self.reg_users.append(user_name)
                 return
             else:
                 print("This username is already taken, try with another one.Incase you already registered then, please log in")
