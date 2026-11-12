@@ -5,13 +5,6 @@
 #2 types of users, regular user and the admin user, if admin user user logs in he should be able to see all the regular users and
 #if a regular user logs in show him his name.
 
-#implement a user login system in python,
-#user should be provided with 2 options login and register,
-#login should take user name and password, 
-#register should take the user details and save the user
-#2 types of users, regular user and the admin user, if admin user user logs in he should be able to see all the regular users and
-#if a regular user logs in show him his name.
-
 class System:
     def __init__(self):
         self.reg_existing_users=None
