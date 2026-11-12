@@ -7,8 +7,8 @@
 
 class System:
     def __init__(self):
-        self.reg_existing_users=None
-        self.adm_existing_users=None
+        self.reg_users=[]
+        self.adm_users=[]
     def login(self,user_name,password,data,isadmin):
         if len(data)<1:
             print("No user information exist so, user should register first.")
@@ -31,8 +31,7 @@ class System:
 
     def register(self,name,user_name,password,email,dob,data,adm_data,isadmin):
         if isadmin:
-            self.adm_existing_users=(d["user_name"] for d in adm_data)
-            if user_name not in self.adm_existing_users:
+            if user_name not in self.adm_users:
                 adm_data.append({
                     "name":name,
                     "user_name":user_name,
@@ -40,14 +39,14 @@ class System:
                     "email":email,
                     "dob":dob
                 })
+                self.adm_users.append("user_name")
                 return
             else:
                 print("This username is already taken, try with another one.Incase you already registered then, please log in")
                 return
 
         else:
-            self.reg_existing_users=(d["user_name"] for d in data)
-            if user_name not in self.reg_existing_users:
+            if user_name not in self.reg_users:
                 data.append({
                     "name":name,
                     "user_name":user_name,
@@ -55,6 +54,7 @@ class System:
                     "email":email,
                     "dob":dob
                 })
+                self.reg_users.append("user_name")
                 return
             else:
                 print("This username is already taken, try with another one.Incase you already registered then, please log in")
