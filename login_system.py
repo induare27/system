@@ -55,8 +55,7 @@ def main():
         if Choice==1:
                 user_name=input("Enter user name: ")
                 password=input("Enter password: ")
-                user_type=input("Enter your registered user type: ")
-                ls.login(user_name,password,user_type,user_details)
+                ls.login(user_name,password,user_details)
         elif Choice==2:
                 print("User details")
                 print("Please mention user type as admin or regular.")
