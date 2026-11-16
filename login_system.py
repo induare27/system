@@ -7,105 +7,66 @@
 
 class System:
     def __init__(self):
-        self.reg_users=[]
-        self.adm_users=[]
-    def login(self,user_name,password,data,isadmin):
-        if len(data)<1:
+        self.exisisting_users=[]
+    def login(self,user_name,password,user_details):
+        if len(user_details)<1:
             print("No user information exist so, user should register first.")
             return
-        if isadmin:
-                for d in data:
-                    print(d["user_name"])
+        for d in user_details:
+             if d["user_name"]==user_name and d["password"]==password:
+                  user_type=d["user_type"]
+                  break
+        if user_type=="admin":
+                for d in user_details:
+                    print(d["name"])
                 return
-        else:
-            for d in data:
+        elif user_type=="regular":
+            for d in user_details:
                 if d["user_name"]==user_name and d["password"]==password:
                     print(d["name"])
                     return
-        print("Username/password doesn't exit, please check your user_name/password." \
-                    " Incase if you dont have any account please register first.")
+        print("Username/password doesn't exit, please check your user_name/password. or mentioned wrong user type.")
+        print("Incase if you dont have any account please register first.")
         return
         
-
-
-    def register(self,name,user_name,password,email,dob,data,adm_data,isadmin):
-        if isadmin:
-            if user_name not in self.adm_users:
-                adm_data.append({
-                    "name":name,
-                    "user_name":user_name,
-                    "password":password,
-                    "email":email,
-                    "dob":dob
-                })
-                self.adm_users.append(user_name)
-                return
-            else:
-                print("This username is already taken, try with another one.Incase you already registered then, please log in")
-                return
-
+    def register(self,name,user_name,user_type,password,email,dob,user_details):
+        if user_name not in self.exisisting_users:
+            user_details.append({
+                "name":name,
+                "user_name":user_name,
+                "user_type":user_type,
+                "password":password,
+                "email":email,
+                "dob":dob
+            })
+            self.exisisting_users.append(user_name)
+            return
         else:
-            if user_name not in self.reg_users:
-                data.append({
-                    "name":name,
-                    "user_name":user_name,
-                    "password":password,
-                    "email":email,
-                    "dob":dob
-                })
-                self.reg_users.append(user_name)
-                return
-            else:
-                print("This username is already taken, try with another one.Incase you already registered then, please log in")
-                return
+            print("This username is already taken, try with another one.Incase you already registered then, please log in")
+            return
 
 def main():
-    data=[]
-    adm_data=[]
+    user_details=[]
     ls=System()
     while True:
         print("Choice 1 - Login")
         print("Choice 2 - Register")
         Choice=int(input("Enter your choice: "))
         if Choice==1:
-            print("Choice 1 - Admin login.")
-            print("Choice 2 - Regular user login.")
-            isadmin=False
-            choice=int(input("Enter your choice: "))
-            if choice==1:
-                isadmin=True
                 user_name=input("Enter user name: ")
                 password=input("Enter password: ")
-                ls.login(user_name,password,data,isadmin)
-            elif choice==2:
-                user_name=input("Enter user name: ")
-                password=input("Enter password: ")
-                ls.login(user_name,password,data,isadmin)
-            else:
-                print("Enter valid choice.")
+                user_type=input("Enter your registered user type: ")
+                ls.login(user_name,password,user_type,user_details)
         elif Choice==2:
-            print("User details")
-            print("Choice 1 - Admin register.")
-            print("Choice 2 - Regular user register.")
-            isadmin=False
-            choice=int(input("Enter your choice: "))
-            if choice==1:
-                isadmin=True
+                print("User details")
+                print("Please mention user type as admin or regular.")
                 name=input("Enter your name: ")
                 user_name=input("Enter user name: ")
+                user_type=input("Enter user type: ")
                 password=input("Enter password: ")
                 email=input("Enter your mail id: ")
                 dob=input("Enter your Date of birth: ")
-                ls.register(name,user_name,password,email,dob,data,adm_data,isadmin)
-            elif choice==2:
-                name=input("Enter your name: ")
-                user_name=input("Enter user name: ")
-                password=input("Enter password: ")
-                email=input("Enter your mail id: ")
-                dob=input("Enter your Date of birth: ")
-                ls.register(name,user_name,password,email,dob,data,adm_data,isadmin)
-            else:
-                print("Enter valid choice.")
+                ls.register(name,user_name,user_type,password,email,dob,user_details)
         elif Choice==3:
             print("Exiting...")
             break
