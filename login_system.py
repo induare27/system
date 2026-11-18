@@ -42,8 +42,8 @@ class System:
                     "email":email,
                     "dob":dob
                 })
-                print("Successfully registered our account.")
-                return
+        print("Successfully registered our account.")
+        return
 
 def main():
     user_details=[]
