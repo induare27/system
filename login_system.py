@@ -42,7 +42,7 @@ class System:
                     "email":email,
                     "dob":dob
                 })
-        print("Successfully registered our account.")
+        print("Successfully registered your account.")
         return
 
 def main():
