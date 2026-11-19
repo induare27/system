@@ -5,10 +5,10 @@
 #2 types of users, regular user and the admin user, if admin user user logs in he should be able to see all the regular users and
 #if a regular user logs in show him his name.
 
-class System:
+class Login:
     def __init__(self):
         pass
-    def login(self,user_name,password,user_details):
+    def login_acc(self,user_name,password,user_details):
         if len(user_details)<1:
             print("\nNo user information exist so, user should register first.\n")
             return
@@ -28,8 +28,21 @@ class System:
         print("\nUsername/password doesn't exit, please check your user_name/password.")
         print("Incase if you dont have any account please register first.\n")
         return
-        
-    def register(self,name,user_name,user_type,password,email,dob,user_details):
+    def delete_acc(self,user_name,password,user_details):
+        if len(user_details)<1:
+            print("\nNo user information exist to delete account.\n")
+            return
+        for d in user_details:
+            if d["user_name"]==user_name and d["password"]==password:
+                user_details.remove(d)
+                print("Account is deleted.")
+                return
+        print("\nUsername/password doesn't exit, please check your user_name/password to delete.")
+        return
+class Register:
+    def __init__(self):
+        pass
+    def register_acc(self,name,user_name,user_type,password,email,dob,user_details):
         for d in user_details:
             if d["user_name"]==user_name:
                 print("This username is already taken, try with another one.Incase you already registered then, please log in")
@@ -47,18 +60,20 @@ class System:
 
 def main():
     user_details=[]
-    ls=System()
+    ls=Login()
+    rs=Register()
     while True:
         print("Choice 1 - Login")
         print("Choice 2 - Register")
+        print("Choice 3 - Delete")
         Choice=int(input("Enter your choice: "))
         if Choice==1:
-                print("__Login__")
+                print("__Login account__")
                 user_name=input("Enter user name: ")
                 password=input("Enter password: ")
-                ls.login(user_name,password,user_details)
+                ls.login_acc(user_name,password,user_details)
         elif Choice==2:
-                print("\n__Register__")
+                print("\n__Register account__")
                 print("User details")
                 print("Please mention user type as admin or regular.")
                 name=input("Enter your name: ")
@@ -68,10 +83,15 @@ def main():
                 email=input("Enter your mail id: ")
                 dob=input("Enter your Date of birth: ")
                 if user_type=="admin" or user_type=="regular:
-                    ls.register(name,user_name,user_type,password,email,dob,user_details)
+                    rs.register_acc(name,user_name,user_type,password,email,dob,user_details)
                 else:
                     print("\nUser type is wrong, please check it and register again.")
         elif Choice==3:
+                print("__Delete account__")
+                user_name=input("Enter user name: ")
+                password=input("Enter password: ")
+                ls.delete_acc(user_name,password,user_details)
+        elif Choice==4:
             print("Exiting...")
             break
         else:
